@@ -1,0 +1,19 @@
+{
+    "status": "passed",
+    "train_samples": 1600,
+    "test_samples": 400,
+    "feature_count": 20,
+    "classes_present_train": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "classes_present_test": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "errors": []
+}

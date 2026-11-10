@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Price AI — Intelligent Prediction & MLOps Platform</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="brand-title">Mobile Price AI</h1>
+                    <p class="brand-subtitle">Production MLOps Classification Platform</p>
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <button class="nav-tab active" data-tab="tab-predict">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                    Predict Price
+                </button>
+                <button class="nav-tab" data-tab="tab-batch">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    Batch Evaluation
+                </button>
+                <button class="nav-tab" data-tab="tab-metrics">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Model Metrics
+                </button>
+                <button class="nav-tab" data-tab="tab-history">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Prediction Audit Logs
+                </button>
+                <button class="nav-tab" data-tab="tab-about">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    Architecture
+                </button>
+            </nav>
+
+            <div class="header-badges">
+                <span class="status-pill status-online" id="api-status-pill">
+                    <span class="status-dot"></span>
+                    <span id="api-status-text">Production Model: v1.0.0 (96.50% Acc)</span>
+                </span>
+                <a href="/docs" target="_blank" class="docs-btn" title="Open Interactive FastAPI Swagger UI">
+                    <span>API Docs</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- TAB 1: PREDICTOR -->
+        <section id="tab-predict" class="tab-panel active">
+            <div class="panel-header">
+                <div>
+                    <h2 class="panel-title">Mobile Phone Specification & Price Predictor</h2>
+                    <p class="panel-desc">Configure the hardware specifications across 20 parameters to predict the market price range with multi-class probability confidence.</p>
+                </div>
+                <div class="preset-group">
+                    <span class="preset-label">Quick Test Presets:</span>
+                    <button type="button" class="preset-btn" onclick="applyPreset('budget')">Budget ($)</button>
+                    <button type="button" class="preset-btn" onclick="applyPreset('medium')">Mid-Range ($$)</button>
+                    <button type="button" class="preset-btn" onclick="applyPreset('high')">Premium ($$$)</button>
+                    <button type="button" class="preset-btn" onclick="applyPreset('flagship')">Flagship ($$$$)</button>
+                </div>
+            </div>
+
+            <div class="grid-layout">
+                <!-- Specification Input Form -->
+                <form id="prediction-form" class="spec-form card" onsubmit="handleSinglePredict(event)">
+                    <div class="form-section-header">
+                        <span class="section-badge">1</span>
+                        <h3>Memory & Core Performance</h3>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="ram">RAM (MB) <span class="required">*</span></label>
+                            <input type="number" id="ram" name="ram" min="256" max="16384" step="1" required value="2048" class="form-control">
+                            <small class="form-hint">Crucial pricing driver (256 - 4000 MB)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="int_memory">Internal Storage (GB) <span class="required">*</span></label>
+                            <input type="number" id="int_memory" name="int_memory" min="2" max="512" step="1" required value="32" class="form-control">
+                            <small class="form-hint">Internal ROM capacity (2 - 64 GB)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="clock_speed">Clock Speed (GHz) <span class="required">*</span></label>
+                            <input type="number" id="clock_speed" name="clock_speed" min="0.4" max="3.5" step="0.1" required value="1.8" class="form-control">
+                            <small class="form-hint">CPU clock rate (0.5 - 3.0 GHz)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="n_cores">Processor Cores <span class="required">*</span></label>
+                            <input type="number" id="n_cores" name="n_cores" min="1" max="16" step="1" required value="4" class="form-control">
+                            <small class="form-hint">Number of CPU cores (1 - 8)</small>
+                        </div>
+                    </div>
+
+                    <div class="form-section-header">
+                        <span class="section-badge">2</span>
+                        <h3>Battery & Physical Dimensions</h3>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="battery_power">Battery Capacity (mAh) <span class="required">*</span></label>
+                            <input type="number" id="battery_power" name="battery_power" min="500" max="3000" step="1" required value="1400" class="form-control">
+                            <small class="form-hint">Total battery energy (501 - 1998 mAh)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="talk_time">Talk Time (Hours) <span class="required">*</span></label>
+                            <input type="number" id="talk_time" name="talk_time" min="1" max="35" step="1" required value="12" class="form-control">
+                            <small class="form-hint">Single charge talk duration (2 - 20 hrs)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile_wt">Weight (Grams) <span class="required">*</span></label>
+                            <input type="number" id="mobile_wt" name="mobile_wt" min="50" max="300" step="1" required value="140" class="form-control">
+                            <small class="form-hint">Device body weight (80 - 200 g)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="m_dep">Mobile Depth (cm) <span class="required">*</span></label>
+                            <input type="number" id="m_dep" name="m_dep" min="0.05" max="1.5" step="0.1" required value="0.5" class="form-control">
+                            <small class="form-hint">Device thickness (0.1 - 1.0 cm)</small>
+                        </div>
+                    </div>
+
+                    <div class="form-section-header">
+                        <span class="section-badge">3</span>
+                        <h3>Display & Camera Resolution</h3>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="px_height">Pixel Height (px) <span class="required">*</span></label>
+                            <input type="number" id="px_height" name="px_height" min="0" max="3000" step="1" required value="720" class="form-control">
+                            <small class="form-hint">Screen pixel height (0 - 1960 px)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="px_width">Pixel Width (px) <span class="required">*</span></label>
+                            <input type="number" id="px_width" name="px_width" min="400" max="3000" step="1" required value="1280" class="form-control">
+                            <small class="form-hint">Screen pixel width (500 - 1998 px)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="sc_h">Screen Height (cm) <span class="required">*</span></label>
+                            <input type="number" id="sc_h" name="sc_h" min="4" max="30" step="1" required value="14" class="form-control">
+                            <small class="form-hint">Physical screen height (5 - 19 cm)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="sc_w">Screen Width (cm) <span class="required">*</span></label>
+                            <input type="number" id="sc_w" name="sc_w" min="0" max="25" step="1" required value="7" class="form-control">
+                            <small class="form-hint">Physical screen width (0 - 18 cm)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="pc">Primary Camera (MP) <span class="required">*</span></label>
+                            <input type="number" id="pc" name="pc" min="0" max="60" step="1" required value="12" class="form-control">
+                            <small class="form-hint">Rear main sensor (0 - 20 MP)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="fc">Front Camera (MP) <span class="required">*</span></label>
+                            <input type="number" id="fc" name="fc" min="0" max="30" step="1" required value="5" class="form-control">
+                            <small class="form-hint">Front selfie sensor (0 - 19 MP)</small>
+                        </div>
+                    </div>
+
+                    <div class="form-section-header">
+                        <span class="section-badge">4</span>
+                        <h3>Connectivity & Hardware Features</h3>
+                    </div>
+                    <div class="toggle-grid">
+                        <label class="toggle-card">
+                            <input type="checkbox" id="four_g" name="four_g" checked>
+                            <div class="toggle-content">
+                                <span class="toggle-icon">📶</span>
+                                <div>
+                                    <strong>4G Network</strong>
+                                    <span>LTE Support</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="toggle-card">
+                            <input type="checkbox" id="three_g" name="three_g" checked>
+                            <div class="toggle-content">
+                                <span class="toggle-icon">🌐</span>
+                                <div>
+                                    <strong>3G Network</strong>
+                                    <span>HSPA+ Support</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="toggle-card">
+                            <input type="checkbox" id="wifi" name="wifi" checked>
+                            <div class="toggle-content">
+                                <span class="toggle-icon">📡</span>
+                                <div>
+                                    <strong>Wi-Fi</strong>
+                                    <span>WLAN Wireless</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="toggle-card">
+                            <input type="checkbox" id="blue" name="blue" checked>
+                            <div class="toggle-content">
+                                <span class="toggle-icon">🔷</span>
+                                <div>
+                                    <strong>Bluetooth</strong>
+                                    <span>Short-range sync</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="toggle-card">
+                            <input type="checkbox" id="dual_sim" name="dual_sim" checked>
+                            <div class="toggle-content">
+                                <span class="toggle-icon">💳</span>
+                                <div>
+                                    <strong>Dual SIM</strong>
+                                    <span>2 SIM Card Slots</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="toggle-card">
+                            <input type="checkbox" id="touch_screen" name="touch_screen" checked>
+                            <div class="toggle-content">
+                                <span class="toggle-icon">👆</span>
+                                <div>
+                                    <strong>Touch Screen</strong>
+                                    <span>Capacitive touch</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="predict-btn" class="btn btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            Predict Price Range
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset Specs</button>
+                    </div>
+                </form>
+
+                <!-- Live Prediction Result Card -->
+                <div class="result-column">
+                    <div id="result-placeholder" class="card result-card empty-state">
+                        <div class="empty-icon">📱</div>
+                        <h3>Awaiting Device Specifications</h3>
+                        <p>Fill out the 20 mobile hardware parameters on the left or select a quick preset to trigger production model inference.</p>
+                        <div class="feature-tip">
+                            <span>💡 Tip:</span> RAM and Battery capacity represent >80% of model feature weight.
+                        </div>
+                    </div>
+
+                    <div id="result-display" class="card result-card" style="display: none;">
+                        <div class="result-header">
+                            <div>
+                                <span class="meta-label">Classification Output</span>
+                                <h3 id="res-class-name" class="result-title">High Cost</h3>
+                            </div>
+                            <span id="res-class-badge" class="class-badge badge-class-2">Class 2</span>
+                        </div>
+
+                        <div class="price-estimate-banner">
+                            <div class="price-val" id="res-price-inr">₹20,000 – ₹35,000</div>
+                            <div class="price-sub" id="res-price-usd">Estimated USD: $250 – $450</div>
+                        </div>
+
+                        <p id="res-desc" class="result-description">
+                            Upper mid-range device with sharp display, enhanced cameras, and high gaming performance.
+                        </p>
+
+                        <!-- Confidence Meter -->
+                        <div class="confidence-box">
+                            <div class="conf-row">
+                                <span>Model Confidence:</span>
+                                <strong id="res-confidence-pct">97.8%</strong>
+                            </div>
+                            <div class="progress-track">
+                                <div id="res-confidence-bar" class="progress-fill" style="width: 97.8%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Multi-class Probabilities -->
+                        <div class="prob-section">
+                            <h4>Class Probability Distribution</h4>
+                            <div class="prob-bars">
+                                <div class="prob-item">
+                                    <div class="prob-lbl"><span>Low Cost (0)</span><span id="prob-0">1.2%</span></div>
+                                    <div class="progress-track"><div id="bar-0" class="progress-fill fill-0" style="width: 1.2%;"></div></div>
+                                </div>
+                                <div class="prob-item">
+                                    <div class="prob-lbl"><span>Medium Cost (1)</span><span id="prob-1">2.1%</span></div>
+                                    <div class="progress-track"><div id="bar-1" class="progress-fill fill-1" style="width: 2.1%;"></div></div>
+                                </div>
+                                <div class="prob-item">
+                                    <div class="prob-lbl"><span>High Cost (2)</span><span id="prob-2">94.3%</span></div>
+                                    <div class="progress-track"><div id="bar-2" class="progress-fill fill-2" style="width: 94.3%;"></div></div>
+                                </div>
+                                <div class="prob-item">
+                                    <div class="prob-lbl"><span>Very High Cost (3)</span><span id="prob-3">2.4%</span></div>
+                                    <div class="progress-track"><div id="bar-3" class="progress-fill fill-3" style="width: 2.4%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inference Details -->
+                        <div class="inference-meta">
+                            <div>Latency: <span id="res-latency">1.8 ms</span></div>
+                            <div>Request ID: <span id="res-req-id" class="code-font">a4f210b</span></div>
+                            <div>Status: <span class="badge-success">200 OK</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: BATCH EVALUATION -->
+        <section id="tab-batch" class="tab-panel">
+            <div class="panel-header">
+                <div>
+                    <h2 class="panel-title">Batch Mobile Device Price Prediction</h2>
+                    <p class="panel-desc">Run batch predictions on multiple mobile specifications simultaneously via CSV upload or demo dataset.</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary" onclick="loadSampleBatch()">Load 10 Sample Phones</button>
+                </div>
+            </div>
+
+            <div class="card batch-card">
+                <div class="batch-upload-zone" id="drop-zone">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    <h4>Upload Specifications CSV or Click Demo Batch</h4>
+                    <p>File must contain the 20 hardware features. Headers are automatically validated.</p>
+                    <input type="file" id="csv-file-input" accept=".csv" style="display: none;" onchange="handleCsvFile(event)">
+                    <button class="btn btn-secondary" onclick="document.getElementById('csv-file-input').click()">Choose CSV File</button>
+                </div>
+
+                <div id="batch-results-container" style="display: none; margin-top: 24px;">
+                    <div class="batch-summary-bar">
+                        <span id="batch-count-badge">Evaluated: 10 Devices</span>
+                        <button class="btn btn-secondary btn-sm" onclick="exportBatchCsv()">Export CSV</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="batch-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Device ID</th>
+                                    <th>RAM</th>
+                                    <th>Battery</th>
+                                    <th>Cores</th>
+                                    <th>Storage</th>
+                                    <th>Camera</th>
+                                    <th>Predicted Tier</th>
+                                    <th>Confidence</th>
+                                </tr>
+                            </thead>
+                            <tbody id="batch-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: MODEL METRICS & EVALUATION -->
+        <section id="tab-metrics" class="tab-panel">
+            <div class="panel-header">
+                <div>
+                    <h2 class="panel-title">Model Performance & Evaluation Metrics</h2>
+                    <p class="panel-desc">Comprehensive offline test set evaluation (400 stratified samples) and multi-class classification benchmarks.</p>
+                </div>
+                <div>
+                    <button class="btn btn-secondary btn-sm" onclick="fetchMetrics()">Refresh Metrics</button>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="metrics-grid">
+                <div class="card kpi-card">
+                    <span class="kpi-title">Test Accuracy</span>
+                    <div class="kpi-value text-emerald" id="kpi-acc">96.50%</div>
+                    <div class="kpi-sub">386 / 400 correct classifications</div>
+                </div>
+                <div class="card kpi-card">
+                    <span class="kpi-title">Macro Precision</span>
+                    <div class="kpi-value text-cyan" id="kpi-prec">96.53%</div>
+                    <div class="kpi-sub">Balanced across all 4 price tiers</div>
+                </div>
+                <div class="card kpi-card">
+                    <span class="kpi-title">Macro Recall</span>
+                    <div class="kpi-value text-purple" id="kpi-rec">96.50%</div>
+                    <div class="kpi-sub">Exceeds 85% Quality Gate requirement</div>
+                </div>
+                <div class="card kpi-card">
+                    <span class="kpi-title">Macro F1-Score</span>
+                    <div class="kpi-value text-amber" id="kpi-f1">96.50%</div>
+                    <div class="kpi-sub">Harmonic mean of precision & recall</div>
+                </div>
+            </div>
+
+            <!-- Plots Grid -->
+            <div class="charts-grid">
+                <div class="card chart-card">
+                    <h3>Confusion Matrix</h3>
+                    <p class="chart-desc">True vs Predicted class distribution on the 400 holdout test devices.</p>
+                    <div class="img-wrapper">
+                        <img src="/artifacts/confusion_matrix.png" alt="Confusion Matrix" onerror="this.src='/artifacts/confusion_matrix.png'">
+                    </div>
+                </div>
+                <div class="card chart-card">
+                    <h3>One-vs-Rest ROC Curve</h3>
+                    <p class="chart-desc">Multi-class receiver operating characteristic curves (Macro AUC: 0.998).</p>
+                    <div class="img-wrapper">
+                        <img src="/artifacts/roc_curve.png" alt="ROC Curve" onerror="this.src='/artifacts/roc_curve.png'">
+                    </div>
+                </div>
+                <div class="card chart-card full-width">
+                    <h3>Feature Importance & Influence</h3>
+                    <p class="chart-desc">Relative coefficient impact of mobile hardware features in predicting price category.</p>
+                    <div class="img-wrapper">
+                        <img src="/artifacts/feature_importance.png" alt="Feature Importance" onerror="this.src='/artifacts/feature_importance.png'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Algorithm Comparison Table -->
+            <div class="card" style="margin-top: 24px;">
+                <h3>Algorithm Benchmark & Comparison</h3>
+                <p class="chart-desc">Experimental results comparing multiple ML algorithms trained on identical feature sets.</p>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Algorithm</th>
+                                <th>Type</th>
+                                <th>Accuracy</th>
+                                <th>Quality Gate Status</th>
+                                <th>Production Decision</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td><strong>Logistic Regression (L2 Regularized)</strong></td>
+                                <td>Linear Classifier (Scaled)</td>
+                                <td><span class="badge-success">96.50%</span></td>
+                                <td>Passed (&ge; 85%)</td>
+                                <td><strong>Promoted to Production</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Gradient Boosting (GBDT)</td>
+                                <td>Ensemble Trees</td>
+                                <td>92.25%</td>
+                                <td>Passed (&ge; 85%)</td>
+                                <td>Candidate Backup</td>
+                            </tr>
+                            <tr>
+                                <td>Support Vector Machine (SVC)</td>
+                                <td>Kernel Classifier</td>
+                                <td>89.50%</td>
+                                <td>Passed (&ge; 85%)</td>
+                                <td>Candidate Backup</td>
+                            </tr>
+                            <tr>
+                                <td>Random Forest (200 Trees)</td>
+                                <td>Bagging Ensemble</td>
+                                <td>88.75%</td>
+                                <td>Passed (&ge; 85%)</td>
+                                <td>Candidate Baseline</td>
+                            </tr>
+                            <tr>
+                                <td>Decision Tree (Max Depth 6)</td>
+                                <td>Single Tree Baseline</td>
+                                <td>84.50%</td>
+                                <td>Failed (&lt; 85%)</td>
+                                <td>Rejected (Below Gate)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: AUDIT LOGS -->
+        <section id="tab-history" class="tab-panel">
+            <div class="panel-header">
+                <div>
+                    <h2 class="panel-title">Inference Audit & Prediction History</h2>
+                    <p class="panel-desc">Real-time persistent audit log recorded to <code>logs/inference/inference_log.jsonl</code>.</p>
+                </div>
+                <div>
+                    <button class="btn btn-secondary btn-sm" onclick="fetchHistory()">Refresh Logs</button>
+                    <button class="btn btn-secondary btn-sm" onclick="clearAuditHistory()">Clear Logs</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="table-container">
+                    <table class="data-table" id="history-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Request ID</th>
+                                <th>RAM</th>
+                                <th>Battery</th>
+                                <th>Camera</th>
+                                <th>Predicted Tier</th>
+                                <th>Latency</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-tbody">
+                            <tr><td colspan="8" class="text-center">Loading audit history...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: ARCHITECTURE & PROJECT INFO -->
+        <section id="tab-about" class="tab-panel">
+            <div class="panel-header">
+                <div>
+                    <h2 class="panel-title">MLOps Architecture & System Design</h2>
+                    <p class="panel-desc">End-to-end automated machine learning pipeline and microservice deployment overview.</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 24px;">
+                <h3>System Architecture Pipeline</h3>
+                <div class="architecture-diagram">
+                    <div class="arch-box">
+                        <span class="arch-step">01</span>
+                        <h4>Data Ingestion</h4>
+                        <p>SHA-256 validation & data lineage tracking in raw archive</p>
+                    </div>
+                    <div class="arch-arrow">&rarr;</div>
+                    <div class="arch-box">
+                        <span class="arch-step">02-04</span>
+                        <h4>Validation & Preprocessing</h4>
+                        <p>Pandera schema checks, stratified split & StandardScaler</p>
+                    </div>
+                    <div class="arch-arrow">&rarr;</div>
+                    <div class="arch-box">
+                        <span class="arch-step">05-08</span>
+                        <h4>Training & Quality Gate</h4>
+                        <p>Multi-model training, MLflow tracking, 85% accuracy quality gate</p>
+                    </div>
+                    <div class="arch-arrow">&rarr;</div>
+                    <div class="arch-box">
+                        <span class="arch-step">09-11</span>
+                        <h4>Serving & Deployment</h4>
+                        <p>FastAPI production container, Pydantic schemas, sub-5ms latency</p>
+                    </div>
+                    <div class="arch-arrow">&rarr;</div>
+                    <div class="arch-box">
+                        <span class="arch-step">12</span>
+                        <h4>Drift & Monitoring</h4>
+                        <p>KS-test data drift, prediction shift detection & automated trigger</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2-col">
+                <div class="card">
+                    <h3>Dataset Details</h3>
+                    <ul class="info-list">
+                        <li><strong>Dataset Name:</strong> Mobile Price Classification</li>
+                        <li><strong>Total Samples:</strong> 2,000 labelled devices</li>
+                        <li><strong>Features:</strong> 20 mobile hardware specifications</li>
+                        <li><strong>Target Variable:</strong> <code>price_range</code> (4 balanced classes)</li>
+                        <li><strong>Class 0:</strong> Low Cost (Budget entry level)</li>
+                        <li><strong>Class 1:</strong> Medium Cost (Mid-range daily driver)</li>
+                        <li><strong>Class 2:</strong> High Cost (Upper mid-range / performance)</li>
+                        <li><strong>Class 3:</strong> Very High Cost (Flagship premium tier)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Technology Stack</h3>
+                    <ul class="info-list">
+                        <li><strong>Backend API:</strong> FastAPI + Uvicorn ASGI Server</li>
+                        <li><strong>Machine Learning:</strong> Scikit-Learn, NumPy, Pandas</li>
+                        <li><strong>Validation:</strong> Pydantic v2 + Pandera</li>
+                        <li><strong>MLOps Tracking:</strong> MLflow Tracking & Model Registry</li>
+                        <li><strong>Frontend:</strong> Responsive Modern Dashboard (HTML5/CSS3/ES6)</li>
+                        <li><strong>DevOps:</strong> Docker, Kubernetes Manifests, GitHub Actions CI</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Mobile Price Prediction System — Academic & Production Demonstration Ready.</p>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

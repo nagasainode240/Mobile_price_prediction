@@ -1,0 +1,28 @@
+column,present,dtype,null_count,status
+battery_power,True,int64,0,PASSED
+blue,True,int64,0,PASSED
+clock_speed,True,float64,0,PASSED
+dual_sim,True,int64,0,PASSED
+fc,True,int64,0,PASSED
+four_g,True,int64,0,PASSED
+int_memory,True,int64,0,PASSED
+m_dep,True,float64,0,PASSED
+mobile_wt,True,int64,0,PASSED
+n_cores,True,int64,0,PASSED
+pc,True,int64,0,PASSED
+px_height,True,int64,0,PASSED
+px_width,True,int64,0,PASSED
+ram,False,missing,-1,FAILED
+sc_h,True,int64,0,PASSED
+sc_w,True,int64,0,PASSED
+talk_time,True,int64,0,PASSED
+three_g,True,int64,0,PASSED
+touch_screen,True,int64,0,PASSED
+wifi,True,int64,0,PASSED
+price_range,True,int64,0,PASSED
+__ALL_COLUMNS_SCHEMA_CHECK__,True,schema_validation,0,"FAILED: {
+    ""SCHEMA"": {
+        ""COLUMN_NOT_IN_DATAFRAME"": [
+            {
+                ""schema"": null,
+                ""co"

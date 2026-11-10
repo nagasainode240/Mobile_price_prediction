@@ -1,0 +1,87 @@
+# Mobile Price Prediction System - MLOps Configuration
+# Rebuilt to mirror enterprise MLOps architecture for Mobile Price Classification
+
+data:
+  raw_path: data/raw/mobile_price_train.csv
+  test_path: data/raw/mobile_price_test.csv
+  new_data_path: data/raw/new_mobile_batch.csv
+  processed_dir: data/processed
+  target_column: price_range
+  id_column: mobile_id
+  class_labels:
+    0: "Low Cost"
+    1: "Medium Cost"
+    2: "High Cost"
+    3: "Very High Cost"
+  feature_columns:
+    - battery_power
+    - blue
+    - clock_speed
+    - dual_sim
+    - fc
+    - four_g
+    - int_memory
+    - m_dep
+    - mobile_wt
+    - n_cores
+    - pc
+    - px_height
+    - px_width
+    - ram
+    - sc_h
+    - sc_w
+    - talk_time
+    - three_g
+    - touch_screen
+    - wifi
+
+split:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+model:
+  primary:
+    algorithm: LogisticRegression
+    max_iter: 1000
+    C: 1.0
+    random_state: 42
+  baseline:
+    algorithm: DecisionTreeClassifier
+    max_depth: 6
+    random_state: 42
+  ensemble:
+    algorithm: RandomForestClassifier
+    n_estimators: 200
+    max_depth: 12
+    random_state: 42
+
+mlflow:
+  tracking_uri: ""
+  experiment_name: mobile_price_prediction_mlops
+
+registry:
+  model_name: Mobile_Price_Production_Model
+  decision_metric: accuracy
+
+quality_gate:
+  metric: accuracy
+  minimum_value: 0.85
+
+monitoring:
+  drift_significance_level: 0.05
+  ks_p_value_threshold: 0.05
+  psi_threshold: 0.25
+
+paths:
+  preprocessor: models/preprocessor.pkl
+  scaler: models/scaler.pkl
+  model: models/mobile_price_model.pkl
+  evaluation_report: reports/evaluation_report.json
+  quality_gate_report: reports/quality_gate_report.json
+  lifecycle_report: reports/lifecycle_report.json
+  failure_report: reports/failure_report.json
+  inference_output: outputs/inference_predictions.csv
+  deployment_dir: deployment
+  inference_log: logs/inference/inference_log.jsonl
+

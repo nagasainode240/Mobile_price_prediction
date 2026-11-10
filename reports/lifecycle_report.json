@@ -1,0 +1,12 @@
+{
+    "status": "success",
+    "timestamp": "2026-11-10T05:01:25.867702+00:00",
+    "model_name": "Mobile_Price_Production_Model",
+    "promoted": true,
+    "current_stage": "Production",
+    "candidate_version": "1.0.0",
+    "decision_metric": "accuracy",
+    "candidate_score": 0.965,
+    "quality_gate_passed": true,
+    "reason": "Candidate model passed quality gate with accuracy=0.9650 and is promoted to Production."
+}

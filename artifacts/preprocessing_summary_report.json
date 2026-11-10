@@ -1,0 +1,15 @@
+{
+    "status": "success",
+    "train_shape": [
+        1600,
+        20
+    ],
+    "test_shape": [
+        400,
+        20
+    ],
+    "num_features": 20,
+    "target_column": "price_range",
+    "null_counts": 0,
+    "preprocessor_saved": "models/preprocessor.pkl"
+}

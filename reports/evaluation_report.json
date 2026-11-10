@@ -1,0 +1,65 @@
+{
+    "status": "success",
+    "algorithm": "LogisticRegression",
+    "dataset": "Mobile Price Classification (Test Set)",
+    "test_samples": 400,
+    "metrics": {
+        "accuracy": 0.965,
+        "precision_macro": 0.965,
+        "recall_macro": 0.965,
+        "f1_macro": 0.965,
+        "roc_auc_macro": 0.9987
+    },
+    "per_class_metrics": {
+        "Low Cost (0)": {
+            "precision": 0.9899,
+            "recall": 0.98,
+            "f1-score": 0.9849,
+            "support": 100
+        },
+        "Medium Cost (1)": {
+            "precision": 0.96,
+            "recall": 0.96,
+            "f1-score": 0.96,
+            "support": 100
+        },
+        "High Cost (2)": {
+            "precision": 0.9495,
+            "recall": 0.94,
+            "f1-score": 0.9447,
+            "support": 100
+        },
+        "Very High Cost (3)": {
+            "precision": 0.9608,
+            "recall": 0.98,
+            "f1-score": 0.9703,
+            "support": 100
+        }
+    },
+    "confusion_matrix": [
+        [
+            98,
+            2,
+            0,
+            0
+        ],
+        [
+            1,
+            96,
+            3,
+            0
+        ],
+        [
+            0,
+            2,
+            94,
+            4
+        ],
+        [
+            0,
+            0,
+            2,
+            98
+        ]
+    ]
+}

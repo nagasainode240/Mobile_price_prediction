@@ -1,0 +1,48 @@
+name: Mobile Price Prediction CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Stage 01 - Load and Validate Data
+      run: |
+        python src/mlops_pipeline/01_load_data.py
+        python src/mlops_pipeline/02_validate_data.py
+
+    - name: Stage 02 - Preprocessing & Output Checks
+      run: |
+        python src/mlops_pipeline/03_preprocessing.py
+        python src/mlops_pipeline/04_validate_outputs.py
+
+    - name: Stage 03 - Model Training & Quality Gate
+      run: |
+        python src/mlops_pipeline/05_train_registry.py
+        python src/mlops_pipeline/06_model_evaluation.py
+        python src/mlops_pipeline/07_quality_gate.py
+        python src/mlops_pipeline/08_automate_lifecycle.py
+        python src/mlops_pipeline/deploy_if_promoted.py
+
+    - name: Run Test Suites
+      run: |
+        pytest tests/test_api.py tests/test_performance.py -v

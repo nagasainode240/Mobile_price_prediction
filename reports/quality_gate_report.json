@@ -1,0 +1,8 @@
+{
+    "status": "PASSED",
+    "metric": "accuracy",
+    "actual_value": 0.965,
+    "threshold": 0.85,
+    "passed": true,
+    "algorithm": "LogisticRegression"
+}

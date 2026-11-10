@@ -1,0 +1,44 @@
+{
+    "model_name": "Mobile_Price_Production_Model",
+    "model_version": "1.0.0",
+    "algorithm": "LogisticRegression",
+    "framework": "scikit-learn",
+    "features": [
+        "battery_power",
+        "blue",
+        "clock_speed",
+        "dual_sim",
+        "fc",
+        "four_g",
+        "int_memory",
+        "m_dep",
+        "mobile_wt",
+        "n_cores",
+        "pc",
+        "px_height",
+        "px_width",
+        "ram",
+        "sc_h",
+        "sc_w",
+        "talk_time",
+        "three_g",
+        "touch_screen",
+        "wifi"
+    ],
+    "target": "price_range",
+    "class_labels": {
+        "0": "Low Cost",
+        "1": "Medium Cost",
+        "2": "High Cost",
+        "3": "Very High Cost"
+    },
+    "metrics": {
+        "accuracy": 0.965,
+        "precision_macro": 0.965,
+        "recall_macro": 0.965,
+        "f1_macro": 0.965,
+        "roc_auc_macro": 0.9987
+    },
+    "deployed_at": "2026-11-10T05:01:26.242508+00:00",
+    "status": "ready"
+}

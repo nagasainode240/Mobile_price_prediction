@@ -1,0 +1,17 @@
+{
+    "status": "success",
+    "timestamp": "2026-11-10T05:01:47.796884+00:00",
+    "model_name": "Mobile_Price_Production_Model",
+    "health_status": "HEALTHY",
+    "current_accuracy": 0.965,
+    "quality_gate_threshold": 0.85,
+    "accuracy_margin": 0.115,
+    "metrics_summary": {
+        "accuracy": 0.965,
+        "precision_macro": 0.965,
+        "recall_macro": 0.965,
+        "f1_macro": 0.965,
+        "roc_auc_macro": 0.9987
+    },
+    "action_required": "None - System performing above SLA"
+}

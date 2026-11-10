@@ -1,0 +1,15 @@
+feature,ks_statistic,p_value,threshold,drift_detected
+battery_power,0.1275,0.00297,0.05,DRIFT
+clock_speed,0.0,1.0,0.05,NO_DRIFT
+fc,0.0,1.0,0.05,NO_DRIFT
+int_memory,0.0,1.0,0.05,NO_DRIFT
+m_dep,0.0,1.0,0.05,NO_DRIFT
+mobile_wt,0.0,1.0,0.05,NO_DRIFT
+n_cores,0.0,1.0,0.05,NO_DRIFT
+pc,0.0,1.0,0.05,NO_DRIFT
+px_height,0.0,1.0,0.05,NO_DRIFT
+px_width,0.0,1.0,0.05,NO_DRIFT
+ram,0.155,0.00013,0.05,DRIFT
+sc_h,0.0,1.0,0.05,NO_DRIFT
+sc_w,0.0,1.0,0.05,NO_DRIFT
+talk_time,0.0,1.0,0.05,NO_DRIFT

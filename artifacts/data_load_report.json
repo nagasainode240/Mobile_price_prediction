@@ -1,0 +1,39 @@
+{
+    "status": "success",
+    "dataset_name": "Mobile Price Classification",
+    "version": "v01",
+    "rows": 2000,
+    "columns": [
+        "battery_power",
+        "blue",
+        "clock_speed",
+        "dual_sim",
+        "fc",
+        "four_g",
+        "int_memory",
+        "m_dep",
+        "mobile_wt",
+        "n_cores",
+        "pc",
+        "px_height",
+        "px_width",
+        "ram",
+        "sc_h",
+        "sc_w",
+        "talk_time",
+        "three_g",
+        "touch_screen",
+        "wifi",
+        "price_range"
+    ],
+    "target_column": "price_range",
+    "class_distribution": {
+        "1": 500,
+        "2": 500,
+        "3": 500,
+        "0": 500
+    },
+    "sha256": "f9e8cd3154b8684a1be0ff401b1fba7750710af6bd076a399c6ce7ceb979c624",
+    "timestamp": "2026-11-10T04:59:57.966902+00:00",
+    "schema_valid": true
+}
