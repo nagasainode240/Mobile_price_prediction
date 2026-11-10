@@ -101,3 +101,4 @@ python src/mlops_pipeline/12_performance_monitoring.py
 # Run monitor trigger
 python src/mlops_pipeline/12_monitor_trigger.py
 ```
+

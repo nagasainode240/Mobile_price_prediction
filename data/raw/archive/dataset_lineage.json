@@ -8,5 +8,25 @@
         "columns": 21,
         "size_bytes": 122403,
         "timestamp": "2026-11-10T04:59:57.966902+00:00"
+    },
+    {
+        "version": "v02",
+        "filename": "mobile_v02.csv",
+        "raw_source": "data\\raw\\mobile_price_train.csv",
+        "sha256": "f9e8cd3154b8684a1be0ff401b1fba7750710af6bd076a399c6ce7ceb979c624",
+        "rows": 2000,
+        "columns": 21,
+        "size_bytes": 122403,
+        "timestamp": "2026-11-10T09:42:51.936395+00:00"
+    },
+    {
+        "version": "v03",
+        "filename": "mobile_v03.csv",
+        "raw_source": "data\\raw\\mobile_price_train.csv",
+        "sha256": "f9e8cd3154b8684a1be0ff401b1fba7750710af6bd076a399c6ce7ceb979c624",
+        "rows": 2000,
+        "columns": 21,
+        "size_bytes": 122403,
+        "timestamp": "2026-11-10T09:56:00.208157+00:00"
     }
 ]

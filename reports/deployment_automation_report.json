@@ -1,15 +1,7 @@
 {
-    "status": "deployed",
-    "timestamp": "2026-11-10T05:06:24.026630+00:00",
-    "model_name": "Mobile_Price_Production_Model",
-    "version": "1.0.0",
-    "metrics": {
-        "accuracy": 0.965,
-        "precision_macro": 0.965,
-        "recall_macro": 0.965,
-        "f1_macro": 0.965,
-        "roc_auc_macro": 0.9987
-    },
-    "serving_target": "FastAPI ASGI Service",
-    "health_check_url": "http://127.0.0.1:8000/health"
+    "status": "success",
+    "timestamp": "2026-11-10T09:56:44.515085+00:00",
+    "model_version": "1.0.0",
+    "bundle_prepared": true,
+    "deployment_target": "FastAPI Service & K8s Manifest"
 }

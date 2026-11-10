@@ -1,7 +1,7 @@
 {
     "status": "success",
     "dataset_name": "Mobile Price Classification",
-    "version": "v01",
+    "version": "v03",
     "rows": 2000,
     "columns": [
         "battery_power",
@@ -34,6 +34,6 @@
         "0": 500
     },
     "sha256": "f9e8cd3154b8684a1be0ff401b1fba7750710af6bd076a399c6ce7ceb979c624",
-    "timestamp": "2026-11-10T04:59:57.966902+00:00",
+    "timestamp": "2026-11-10T09:56:00.208157+00:00",
     "schema_valid": true
 }
